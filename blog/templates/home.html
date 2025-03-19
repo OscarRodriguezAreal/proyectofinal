@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido al Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #f4a261;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #e9e9e9;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .actions a {
+            margin-left: 10px;
+        }
+        .edit {
+            color: #2980b9;
+        }
+        .delete {
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>Bienvenido al Blog</header>
+    <nav>
+        <a href="{% url 'home' %}">Inicio</a>
+        <a href="{% url 'about' %}">Acerca de mí</a>
+        <a href="{% url 'profile' %}">Mi Perfil</a>
+        <a href="{% url 'blog_list' %}">Ver Blogs</a>
+        <a href="{% url 'blog_create' %}">Crear Blog</a>
+        <a href="{% url 'login' %}">Iniciar Sesión</a>
+        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+        <a href="{% url 'register' %}">Registrarse</a>
+        <a href="{% url 'edit_profile' %}">Editar Perfil</a>
+    </nav>
+
+    <div class="container">
+        <h2>Últimos Blogs</h2>
+        <ul>
+            {% for blog in blogs %}
+                <li>
+                    <a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+                    <div class="actions">
+                        <a href="{% url 'blog_edit' blog.pk %}" class="edit">✏️</a>
+                        
+                    </div>
+                </li>
+            {% empty %}
+                <p>No hay blogs disponibles.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de Mí</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #f4a261;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .contact {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        .contact a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>Acerca de Mí</header>
+    <nav>
+        <a href="{% url 'home' %}">Inicio</a>
+        <a href="{% url 'about' %}">Acerca de mí</a>
+        <a href="{% url 'profile' %}">Mi Perfil</a>
+        <a href="{% url 'blog_list' %}">Ver Blogs</a>
+        <a href="{% url 'blog_create' %}">Crear Blog</a>
+        <a href="{% url 'login' %}">Iniciar Sesión</a>
+        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+        <a href="{% url 'register' %}">Registrarse</a>
+        <a href="{% url 'edit_profile' %}">Editar Perfil</a>
+    </nav>
+
+    <div class="container">
+        <h2>¡Hola! Soy Oscar Rodriguez Areal</h2>
+        <p>Este es mi proyecto final del curso de Python.</p>
+
+        <div class="contact">
+            <p>📧 Correo: <a href="mailto:orareal02@gmail.com">orareal02@gmail.com</a></p>
+            <p>📱 Celular: <a href="tel:+543815035198">+54 381 503 5198</a></p>
+        </div>
+    </div>
+</body>
+</html>
+

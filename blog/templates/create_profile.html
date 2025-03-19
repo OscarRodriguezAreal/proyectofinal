@@ -1,0 +1,11 @@
+<!-- templates/create_profile.html -->
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Crear Perfil</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Crear perfil</button>
+  </form>
+{% endblock %}

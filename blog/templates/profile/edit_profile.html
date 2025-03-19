@@ -1,0 +1,131 @@
+
+
+{% block content %}
+    <style>
+        /* Estilos para el contenedor principal */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Título del formulario */
+        h2 {
+            color: #333;
+            font-size: 26px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Estilos para los campos del formulario */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-top: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #f4a261;
+            outline: none;
+        }
+
+        /* Botón de "Guardar cambios" */
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .btn-submit:hover {
+            background-color: #3498db;
+        }
+
+        /* Estilo para el botón "Clear" (más grande e intuitivo) */
+        .btn-clear {
+            width: 100%;
+            padding: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-clear:hover {
+            background-color: #c0392b;
+        }
+
+        /* Estilos del enlace para "Volver al perfil" */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .back-link a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="container">
+        <h2>Editar Perfil</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Campos del formulario -->
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+
+            <!-- Botón para "Guardar cambios" -->
+            <button type="submit" class="btn-submit">Guardar cambios</button>
+
+            
+        </form>
+
+        <!-- Enlace para volver al perfil -->
+        <p class="back-link"><a href="{% url 'profile' %}">Volver al perfil</a></p>
+    </div>
+{% endblock %}
+
+
+

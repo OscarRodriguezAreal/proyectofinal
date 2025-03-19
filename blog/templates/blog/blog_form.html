@@ -1,0 +1,121 @@
+
+{% block content %}
+    <style>
+        /* Estilos para el contenedor principal */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Título del formulario */
+        h2 {
+            color: #333;
+            font-size: 26px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Estilos para los campos del formulario */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-top: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #f4a261;
+            outline: none;
+        }
+
+        /* Botón de "Crear blog" */
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #3498db;
+        }
+
+        /* Botón "Volver al Home" */
+        .btn-back-home {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back-home:hover {
+            background-color: #c0392b;
+        }
+
+        /* Estilo para los textos de error (en caso de que haya) */
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <h2>Crear un nuevo blog</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Sección de formulario -->
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            
+            <!-- Botón para crear el blog -->
+            <button type="submit" class="btn-submit">Crear blog</button>
+        </form>
+
+        <!-- Botón para volver al Home -->
+        <a href="{% url 'home' %}">
+            <button type="button" class="btn-back-home">Volver al Home</button>
+        </a>
+    </div>
+{% endblock %}
+
+
+

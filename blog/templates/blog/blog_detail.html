@@ -1,0 +1,87 @@
+
+{% block content %}
+    <style>
+        /* Estilos para la página del blog */
+        .blog-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Título del blog */
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Contenido del blog */
+        .blog-content {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos de la imagen */
+        .blog-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo de la fecha */
+        .blog-date {
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Botón para volver al listado de blogs */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 16px;
+        }
+
+        .back-link a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="blog-container">
+        <!-- Título del blog -->
+        <h1>{{ blog.title }}</h1>
+
+        <!-- Contenido del blog -->
+        <div class="blog-content">
+            <p>{{ blog.content }}</p>
+        </div>
+
+        <!-- Imagen del blog (si existe) -->
+        {% if blog.image %}
+            <img src="{{ blog.image.url }}" alt="Imagen del Blog" class="blog_images">
+        {% endif %}
+
+        <!-- Fecha de publicación -->
+        <p class="blog-date">Publicado el: {{ blog.date_created }}</p>
+
+        <!-- Enlace para volver a la lista de blogs -->
+        <p class="back-link"><a href="{% url 'blog_list' %}">Volver a la lista de blogs</a></p>
+    </div>
+{% endblock %}
