@@ -1,8 +1,6 @@
 
-
 {% block content %}
     <style>
-        /* Estilos para el contenedor principal */
         .container {
             width: 100%;
             max-width: 500px;
@@ -15,7 +13,6 @@
             font-family: 'Arial', sans-serif;
         }
 
-        /* Título del formulario */
         h2 {
             color: #333;
             font-size: 26px;
@@ -23,7 +20,6 @@
             text-align: center;
         }
 
-        /* Estilos para los campos del formulario */
         .form-group {
             margin-bottom: 20px;
         }
@@ -35,7 +31,8 @@
             display: block;
         }
 
-        .form-group input, .form-group select, .form-group textarea {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
             padding: 12px;
             font-size: 16px;
@@ -45,12 +42,16 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             border-color: #f4a261;
             outline: none;
         }
 
-        /* Botón de "Guardar cambios" */
+        .form-group input[type="file"] {
+            padding: 6px;
+        }
+
         .btn-submit {
             width: 100%;
             padding: 12px;
@@ -69,26 +70,6 @@
             background-color: #3498db;
         }
 
-        /* Estilo para el botón "Clear" (más grande e intuitivo) */
-        .btn-clear {
-            width: 100%;
-            padding: 18px;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-
-        .btn-clear:hover {
-            background-color: #c0392b;
-        }
-
-        /* Estilos del enlace para "Volver al perfil" */
         .back-link {
             display: block;
             text-align: center;
@@ -110,19 +91,48 @@
         <h2>Editar Perfil</h2>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
-            <!-- Campos del formulario -->
+
+            <!-- Campos del usuario -->
             <div class="form-group">
-                {{ form.as_p }}
+                <label for="id_username">Nombre de usuario</label>
+                <input type="text" name="username" value="{{ form.username.value }}" id="id_username">
             </div>
 
-            <!-- Botón para "Guardar cambios" -->
-            <button type="submit" class="btn-submit">Guardar cambios</button>
+            <div class="form-group">
+                <label for="id_email">Correo electrónico</label>
+                <input type="email" name="email" value="{{ form.email.value }}" id="id_email">
+            </div>
 
-            
+            <div class="form-group">
+                <label for="id_first_name">Primer nombre</label>
+                <input type="text" name="first_name" value="{{ form.first_name.value }}" id="id_first_name">
+            </div>
+
+            <div class="form-group">
+                <label for="id_last_name">Apellido</label>
+                <input type="text" name="last_name" value="{{ form.last_name.value }}" id="id_last_name">
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Nueva Contraseña</label>
+                <input type="password" name="password" value="{{ form.password.value }}" id="id_password">
+            </div>
+
+            <!-- Avatar con botón -->
+            <div class="form-group">
+                <label for="id_avatar">Cambiar Avatar</label>
+                <input type="file" name="avatar" accept="image/*" id="id_avatar">
+            </div>
+
+            <!-- Biografía con 500 caracteres -->
+            <div class="form-group">
+                <label for="id_biografia">Biografía (máx. 500 caracteres)</label>
+                <textarea name="biografia" id="id_biografia" maxlength="500">{{ perfil_form.biografia.value }}</textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Guardar cambios</button>
         </form>
 
-        <!-- Enlace para volver al perfil -->
         <p class="back-link"><a href="{% url 'profile' %}">Volver al perfil</a></p>
     </div>
 {% endblock %}

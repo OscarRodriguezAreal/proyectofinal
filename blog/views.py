@@ -126,3 +126,82 @@ from .models import Blog
 def home(request):
     blogs = Blog.objects.all()  
     return render(request, 'home.html', {'blogs': blogs})
+
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+
+def home(request):
+    if not request.user.is_authenticated:
+        return redirect('login')  # o el nombre correcto de tu url de login
+    return render(request, 'home.html')
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from .forms import CustomUserEditForm
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import ProfileUpdateForm
+from .models import Profile
+
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from .models import Profile
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    profile = user.profile  # Asumimos que el perfil ya existe
+
+    if request.method == 'POST':
+        # Obtener valores del formulario
+        user.username = request.POST.get('username')
+        user.email = request.POST.get('email')
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        password = request.POST.get('password')
+        if password:
+            user.set_password(password)  # Cambiar contraseña
+        user.save()
+
+        profile.biografia = request.POST.get('biografia', '')
+        if 'avatar' in request.FILES:
+            profile.avatar = request.FILES['avatar']
+        profile.save()
+
+        return redirect('login')  # Redirigimos para ver los cambios
+
+    context = {
+        'form': user,
+        'perfil_form': profile,
+    }
+    return render(request, 'profile/edit_profile.html', context)
+
+@login_required
+def profile(request):
+    profile = request.user.profile
+    return render(request, 'profile/profile.html', {'profile': profile})
+
+from django.shortcuts import render
+from .models import Blog  
+
+def home(request):
+    blogs = Blog.objects.all()
+    return render(request, 'home.html', {'blogs': blogs})
+
+from django.shortcuts import render, get_object_or_404, redirect
+
+
+@login_required
+def blog_delete(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    
+    if request.method == "POST":
+        blog.delete()
+        return redirect('home')  # Cambiá si tu URL del inicio tiene otro nombre
+    
+    return render(request, 'blog/blog_confirm_delete.html', {'blog': blog})

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido al Blog</title>
+    <title>Eliminar Blog</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,6 +77,34 @@
         .delete {
             color: #c0392b;
         }
+        .confirmation {
+            background: #e9e9e9;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .confirmation button {
+            background-color: #c0392b;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .confirmation button:hover {
+            background-color: #e74c3c;
+        }
+        .confirmation a {
+            text-decoration: none;
+            color: #2980b9;
+            font-size: 14px;
+        }
+        .confirmation a:hover {
+            color: #f4a261;
+        }
     </style>
 </head>
 <body>
@@ -92,29 +120,16 @@
     </nav>
 
     <div class="container">
-        <h2>Últimos Blogs</h2>
-        {% if blogs %}
-            {% for blog in blogs %}
-                <div class="blog-entry">
-                    <h3><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h3>
-                    <p class="blog-meta">
-                        Publicado por {{ blog.author.username }} el {{ blog.created_at|date:"d M Y" }}
-                    </p>
-                    <p>{{ blog.content|truncatechars:150 }}</p>
-                    <div class="actions">
-                        <a href="{% url 'blog_edit' blog.pk %}" class="edit">✏️ Editar</a>
-                        <a href="{% url 'blog_delete' blog.pk %}" class="delete">🗑️ Eliminar</a>
-                        
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No hay blogs disponibles.</p>
-        {% endif %}
+        <h2>Eliminar Blog</h2>
+        <p>¿Estás seguro de que quieres eliminar el blog <strong>"{{ blog.title }}"</strong>?</p>
+        
+        <div class="confirmation">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Sí, eliminar</button>
+            </form>
+            <a href="{% url 'home' %}">Cancelar</a>
+        </div>
     </div>
 </body>
 </html>
-
-
-
-

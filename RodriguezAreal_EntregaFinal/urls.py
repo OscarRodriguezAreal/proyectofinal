@@ -25,8 +25,11 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
+from blog.views import blog_delete
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),  # Vista 'Acerca de mí'
     path('profile/', views.profile, name='profile'),  # Vista de perfil
@@ -36,13 +39,15 @@ urlpatterns = [
     path('blog/<int:pk>/edit/', BlogUpdateView.as_view(), name='blog_edit'),
     path('blog/<int:pk>/delete/', BlogDeleteView.as_view(), name='blog_delete'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('login/', LogoutView.as_view(), name='logout'),
     path('register/', views.register, name='register'),
     path('edit/', views.edit_profile, name='edit_profile'),
     path('add-author/', views.add_author, name='add_author'),
     path('add-category/', views.add_category, name='add_category'),
     path('add-post/', views.add_post, name='add_post'),
     path('buscar-post/', views.search_post, name='search_post'),
+    path('blogs/<int:pk>/eliminar/', blog_delete, name='blog_delete'),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

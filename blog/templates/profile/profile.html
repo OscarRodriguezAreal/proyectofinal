@@ -10,6 +10,7 @@
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
+        font-family: 'Arial', sans-serif;
     }
     .profile-container h2 {
         color: #333;
@@ -26,10 +27,21 @@
         border: 3px solid #444;
         margin-bottom: 15px;
     }
+    .profile-info {
+        text-align: left;
+        margin: 20px 0;
+        font-size: 16px;
+        color: #555;
+    }
+    .profile-info strong {
+        display: inline-block;
+        width: 100px;
+    }
     .bio {
         font-size: 16px;
         color: #666;
-        margin-bottom: 20px;
+        margin-top: 10px;
+        white-space: pre-wrap;
     }
     .btn {
         display: inline-block;
@@ -63,14 +75,20 @@
 
     {% if profile %}
       <h3>{{ profile.user.username }}</h3>
-      
+
       {% if profile.avatar %}
         <img class="profile-avatar" src="{{ profile.avatar.url }}" alt="Avatar">
       {% else %}
         <p>No tienes un avatar.</p>
       {% endif %}
 
-      <p class="bio"><strong>Biografía:</strong> {{ profile.bio|default:"No tienes biografía." }}</p>
+      <div class="profile-info">
+        <p><strong>Nombre:</strong> {{ profile.user.first_name|default:"-" }}</p>
+        <p><strong>Apellido:</strong> {{ profile.user.last_name|default:"-" }}</p>
+        <p><strong>Email:</strong> {{ profile.user.email|default:"-" }}</p>
+        <p><strong>Biografía:</strong></p>
+        <p class="bio">{{ profile.biografia|default:"No tienes biografía." }}</p>
+      </div>
 
       <a href="{% url 'edit_profile' %}" class="btn btn-edit">Editar Perfil</a>
       <a href="{% url 'home' %}" class="btn btn-home">Volver a Home</a>
